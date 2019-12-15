@@ -1,4 +1,4 @@
-FROM gcr.io/seandonmooy-1292/tacticsonline-base:dirty
+FROM node:12-alpine
 
 WORKDIR /worker
 
