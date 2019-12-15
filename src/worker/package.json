@@ -1,0 +1,8 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Seandon Mooy",
+  "license": "UNLICENSED",
+  "private": true
+}

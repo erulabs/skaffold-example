@@ -1,0 +1,27 @@
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+  - image: gcr.io/seandonmooy-1292/tacticsonline-base
+    context: inf/images/base
+  - image: gcr.io/seandonmooy-1292/tacticsonline-api
+    context: src
+    docker:
+      dockerfile: api/Dockerfile
+    sync:
+        infer:
+        - 'api/**/*'
+  - image: gcr.io/seandonmooy-1292/tacticsonline-matchmaker
+    context: src
+    docker:
+      dockerfile: matchmaker/Dockerfile
+    sync:
+        infer:
+        - 'matchmaker/**/*'
+  - image: gcr.io/seandonmooy-1292/tacticsonline-worker
+    context: src
+    docker:
+      dockerfile: worker/Dockerfile
+    sync:
+        infer:
+        - 'worker/**/*'
