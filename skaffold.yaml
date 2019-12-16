@@ -41,12 +41,12 @@ build:
   - image: gcr.io/seandonmooy-1292/tacticsonline-www
     context: src
     docker:
-      dockerfile: www/Dockerfile
+      dockerfile: www/Dockerfile-dev
     sync:
-        infer:
-        - 'www/**/*.js'
-        - 'www/**/*.html'
-        - 'lib/**/*.js'
+      manual:
+      - src: 'www/**/*.js'
+        dest: .
+        strip: www/
 deploy:
   kustomize:
     path: "inf/k8s/overlays/dev"
@@ -65,3 +65,9 @@ profiles:
     deploy:
       kustomize:
         path: "inf/k8s/overlays/prod"
+    build:
+      artifacts:
+      - image: gcr.io/seandonmooy-1292/tacticsonline-www
+        context: src
+        docker:
+          dockerfile: www/Dockerfile

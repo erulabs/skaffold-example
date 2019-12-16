@@ -2,7 +2,8 @@ FROM node:12-alpine
 
 WORKDIR /app
 
-COPY worker/package.json worker/yarn.lock ./
+COPY worker/package.json /app/package.json
+COPY worker/yarn.lock /app/yarn.lock
 
 RUN yarn install --production
 

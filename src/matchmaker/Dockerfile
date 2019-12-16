@@ -2,7 +2,8 @@ FROM node:12-alpine
 
 WORKDIR /app
 
-COPY matchmaker/package.json matchmaker/yarn.lock ./
+COPY matchmaker/package.json /app/package.json
+COPY matchmaker/yarn.lock /app/yarn.lock
 
 RUN yarn install --production
 

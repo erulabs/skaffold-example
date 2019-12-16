@@ -2,7 +2,8 @@ FROM node:12-alpine
 
 WORKDIR /app
 
-COPY gameserver/package.json gameserver/yarn.lock ./
+COPY gameserver/package.json /app/package.json
+COPY gameserver/yarn.lock /app/yarn.lock
 
 RUN yarn install --production
 
