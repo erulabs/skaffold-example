@@ -4,5 +4,26 @@
   "main": "index.js",
   "author": "Seandon Mooy",
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "connect-redis": "^4.0.3",
+    "connect-timeout": "^1.9.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "helmet": "^3.21.2",
+    "ioredis": "^4.14.1",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.1",
+    "passport-http": "^0.3.0",
+    "passport.socketio": "^3.7.0",
+    "prom-client": "^11.5.3",
+    "serialize-error": "^5.0.0",
+    "socket.io": "^2.3.0",
+    "socket.io-redis": "^5.2.0",
+    "winston": "^3.2.1"
+  }
 }

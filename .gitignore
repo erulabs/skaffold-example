@@ -1,24 +1,11 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
-# dependencies
 node_modules
-
-# testing
 /coverage
-
-# development
 /dist
-
-# production
 /build
-
-# misc
 .DS_Store
-
 inf/ansible/group_vars/*.yaml
 !inf/ansible/group_vars/ci/*.yaml
 inf/ansible/inventories/credentials
-
 *.tar.gz
 *.log
 /secrets
@@ -32,3 +19,9 @@ tmp
 /.env
 terraform.tfstate.*
 *.retry
+/.pnp
+.pnp.js
+.env.local
+.env.development.local
+.env.test.local
+*.local

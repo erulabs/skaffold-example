@@ -8,18 +8,33 @@ build:
       dockerfile: api/Dockerfile
     sync:
         infer:
-        - 'api/**/*'
+        - 'api/**/*.js'
+        - 'lib/**/*.js'
+        - 'backend/**/*.js'
   - image: gcr.io/seandonmooy-1292/tacticsonline-matchmaker
     context: src
     docker:
       dockerfile: matchmaker/Dockerfile
     sync:
         infer:
-        - 'matchmaker/**/*'
+        - 'matchmaker/**/*.js'
+        - 'lib/**/*.js'
+        - 'backend/**/*.js'
   - image: gcr.io/seandonmooy-1292/tacticsonline-worker
     context: src
     docker:
       dockerfile: worker/Dockerfile
     sync:
         infer:
-        - 'worker/**/*'
+        - 'worker/**/*.js'
+        - 'lib/**/*.js'
+        - 'backend/**/*.js'
+  - image: gcr.io/seandonmooy-1292/tacticsonline-www
+    context: src
+    docker:
+      dockerfile: www/Dockerfile
+    sync:
+        infer:
+        - 'www/**/*.js'
+        - 'www/**/*.html'
+        - 'lib/**/*.js'
