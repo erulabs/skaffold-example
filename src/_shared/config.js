@@ -14,8 +14,8 @@ if (process.env.EMAIL_ADDRESSES_DEV) {
 
 const config = {
   // HTTPS Server configuration
-  TLS_KEY_PATH: process.env.TLS_KEY_PATH || `${process.cwd()}/inf/secrets/selfsigned.key.pem`,
-  TLS_CERT_PATH: process.env.TLS_CERT_PATH || `${process.cwd()}/inf/secrets/selfsigned.crt.pem`,
+  TLS_KEY_PATH: process.env.TLS_KEY_PATH || `${process.cwd()}/../inf/secrets/selfsigned.key.pem`,
+  TLS_CERT_PATH: process.env.TLS_CERT_PATH || `${process.cwd()}/../inf/secrets/selfsigned.crt.pem`,
   TLS_CHAIN_PATH: process.env.TLS_CHAIN_PATH,
   API_CORS_ALLOWED_ORIGINS: process.env.API_CORS_ALLOWED_ORIGINS || '',
   // HTTPS Access logging format

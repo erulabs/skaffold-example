@@ -7,6 +7,7 @@
   "private": true,
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",
+    "async-exit-hook": "^2.0.1",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "connect-redis": "^4.0.3",

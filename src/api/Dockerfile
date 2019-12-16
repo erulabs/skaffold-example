@@ -1,6 +1,6 @@
 FROM node:12-alpine
 
-WORKDIR /app
+WORKDIR /app/api
 
 COPY api/package.json api/yarn.lock /app/
 
@@ -12,6 +12,7 @@ RUN yarn install --production && \
 USER nodejs
 
 COPY lib /app/lib
-COPY api/ /app/
+COPY _shared /app/_shared
+COPY api /app/api
 
-CMD ["node", "/app"]
+CMD ["node", "/app/api"]

@@ -139,6 +139,19 @@ server.get('/robots.txt', (req /*: express$Request */, res /*: express$Response 
 
 server.disable('x-powered-by')
 
+// Always send JSON parsable objects
+server.use(function alwaysSendObjects(
+  _req /*: express$Request */,
+  res /*: express$Response */,
+  next /*: express$NextFunction */
+) {
+  // $FlowIssue
+  res.sendStatus = function(code) {
+    res.status(code).send({})
+  }
+  next()
+})
+
 // Additional access logging tokens
 morgan.token('remote-addr', getRealIp)
 morgan.token('url', function(req) {

@@ -1,6 +1,6 @@
 FROM node:12-alpine
 
-WORKDIR /app
+WORKDIR /app/worker
 
 COPY worker/package.json worker/yarn.lock ./
 
@@ -12,6 +12,7 @@ RUN yarn install --production && \
 USER nodejs
 
 COPY lib /app/lib
-COPY worker/ /app/
+COPY _shared /app/_shared
+COPY worker /app/worker
 
-CMD ["node", "/app"]
+CMD ["node", "/app/worker"]

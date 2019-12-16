@@ -22,4 +22,4 @@ FROM nginx:alpine
 
 COPY --from=0 /app/build /app/
 
-CMD ["nginx", "-g", "daemon off"]
+CMD ["nginx", "-g", "daemon off;"]

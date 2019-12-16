@@ -1,6 +1,6 @@
 FROM node:12-alpine
 
-WORKDIR /app
+WORKDIR /app/gameserver
 
 COPY gameserver/package.json gameserver/yarn.lock ./
 
@@ -12,6 +12,7 @@ RUN yarn install --production && \
 USER nodejs
 
 COPY lib /app/lib
-COPY gameserver/ /app/
+COPY _shared /app/_shared
+COPY gameserver /app/gameserver
 
-CMD ["node", "/app"]
+CMD ["node", "/app/gameserver"]

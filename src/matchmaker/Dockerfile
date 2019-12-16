@@ -1,6 +1,6 @@
 FROM node:12-alpine
 
-WORKDIR /app
+WORKDIR /app/matchmaker
 
 COPY matchmaker/package.json matchmaker/yarn.lock ./
 
@@ -12,6 +12,7 @@ RUN yarn install --production && \
 USER nodejs
 
 COPY lib /app/lib
-COPY matchmaker/ /app/
+COPY _shared /app/_shared
+COPY matchmaker /app/matchmaker
 
-CMD ["node", "/app"]
+CMD ["node", "/app/matchmaker"]

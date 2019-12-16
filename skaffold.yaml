@@ -10,7 +10,7 @@ build:
         infer:
         - 'api/**/*.js'
         - 'lib/**/*.js'
-        - 'backend/**/*.js'
+        - '_shared/**/*.js'
   - image: gcr.io/seandonmooy-1292/tacticsonline-gameserver
     context: src
     docker:
@@ -19,7 +19,7 @@ build:
         infer:
         - 'gameserver/**/*.js'
         - 'lib/**/*.js'
-        - 'backend/**/*.js'
+        - '_shared/**/*.js'
   - image: gcr.io/seandonmooy-1292/tacticsonline-matchmaker
     context: src
     docker:
@@ -28,7 +28,7 @@ build:
         infer:
         - 'matchmaker/**/*.js'
         - 'lib/**/*.js'
-        - 'backend/**/*.js'
+        - '_shared/**/*.js'
   - image: gcr.io/seandonmooy-1292/tacticsonline-worker
     context: src
     docker:
@@ -37,7 +37,7 @@ build:
         infer:
         - 'worker/**/*.js'
         - 'lib/**/*.js'
-        - 'backend/**/*.js'
+        - '_shared/**/*.js'
   - image: gcr.io/seandonmooy-1292/tacticsonline-www
     context: src
     docker:

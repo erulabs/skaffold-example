@@ -2,25 +2,19 @@
 
 const Redis = require('ioredis')
 const {
-  REDIS_RATELIMIT_SERVERS,
-  REDIS_CACHE_SERVERS,
-  REDIS_EVENTS_SERVERS,
+  REDIS_GAME_SERVERS,
   REDIS_SESSION_SERVERS
 } = require('./config')
 
 /* flow-include
-type redisTargets = 'RATELIMIT'|'CLUSTERSTATE'|'SESSION'|'CACHE'|'PUB'|'SUB'
+type redisTargets = 'SESSION'|'GAME'
 */
 
 const redisOptions = {}
 
 const redises = {
-  RATELIMIT: { handle: undefined, servers: REDIS_RATELIMIT_SERVERS },
-  CLUSTERSTATE: { handle: undefined, servers: REDIS_CACHE_SERVERS },
   SESSION: { handle: undefined, servers: REDIS_SESSION_SERVERS },
-  CACHE: { handle: undefined, servers: REDIS_CACHE_SERVERS },
-  PUB: { handle: undefined, servers: REDIS_EVENTS_SERVERS },
-  SUB: { handle: undefined, servers: REDIS_EVENTS_SERVERS }
+  GAME: { handle: undefined, servers: REDIS_GAME_SERVERS }
 }
 
 module.exports = function redis(target /*: redisTargets */, forceNew /*: boolean */ = false) {
