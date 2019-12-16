@@ -22,3 +22,6 @@ secretGenerator:
 - name: worker
   type: Opaque
   env: secrets/worker.env.plain
+- name: www
+  type: Opaque
+  env: secrets/www.env.plain

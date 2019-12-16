@@ -7,11 +7,12 @@ const {
   listenHttps,
   server,
   serverErrorHandler,
-  API_LISTEN_PORT
+  cacheControl
 } = require('../_shared/server')
 const redis = require('../_shared/redis')
 const {
-  API_SHUTDOWN_TIMEOUT
+  API_SHUTDOWN_TIMEOUT,
+  API_LISTEN_PORT
 } = require('../_shared/config')
 const { initProm } = require('../_shared/prom')
 
@@ -70,11 +71,8 @@ server.use(serverErrorHandler)
 
 async function Worker() {
   initProm()
-  logger.onlyInProduction('info', 'Worker is starting!', {
-    release
-  })
   await Promise.all([
-    redisCache.ping()
+    redisGame.ping()
   ])
   listenHttps(API_LISTEN_PORT, err => {
     if (err) {
@@ -86,10 +84,11 @@ async function Worker() {
 }
 
 exitHook(callback => {
+  if (process.env.EXIT_IMMEDIATE) return callback()
   shuttingDown = true
   logger.info(`Worker Shutting down in ${API_SHUTDOWN_TIMEOUT}ms`)
   setTimeout(async () => {
-    await Promise.all([redisCache.quit()])
+    await Promise.all([redisGame.quit()])
     callback()
   }, API_SHUTDOWN_TIMEOUT)
 })

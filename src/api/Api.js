@@ -11,14 +11,14 @@ const {
   server,
   serverErrorHandler,
   webSocketServer,
-  cacheControl,
-  API_LISTEN_PORT
+  cacheControl
 } = require('../_shared/server')
 const redis = require('../_shared/redis')
 const {
   API_SHUTDOWN_TIMEOUT,
   WWW_TARGET,
-  COOKIE_DOMAIN
+  COOKIE_DOMAIN,
+  API_LISTEN_PORT
 } = require('../_shared/config')
 const { passport } = require('../_shared/passport')
 const { initProm } = require('../_shared/prom')
@@ -127,13 +127,8 @@ server.use(serverErrorHandler)
 
 async function Api() {
   initProm()
-  logger.onlyInProduction('info', 'API is starting!', {
-    API_LISTEN_PORT,
-    release,
-    WWW_TARGET
-  })
   await Promise.all([
-    redisCache.ping()
+    redisGame.ping()
   ])
   webSocketServer.on('connection', socketConnectionHandler)
   listenHttps(API_LISTEN_PORT, err => {
@@ -146,10 +141,11 @@ async function Api() {
 }
 
 exitHook(callback => {
+  if (process.env.EXIT_IMMEDIATE) return callback()
   shuttingDown = true
   logger.info(`API Shutting down in ${API_SHUTDOWN_TIMEOUT}ms`)
   setTimeout(async () => {
-    await Promise.all([redisCache.quit()])
+    await Promise.all([redisGame.quit()])
     callback()
   }, API_SHUTDOWN_TIMEOUT)
 })

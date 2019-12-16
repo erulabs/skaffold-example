@@ -50,3 +50,18 @@ build:
 deploy:
   kustomize:
     path: "inf/k8s/overlays/dev"
+portForward:
+- resourceType: deployment
+  resourceName: api
+  port: 4000
+  localPort: 4000
+- resourceType: deployment
+  resourceName: www
+  port: 3000
+  localPort: 3000
+profiles:
+  - name: dev
+  - name: prod
+    deploy:
+      kustomize:
+        path: "inf/k8s/overlays/prod"

@@ -19,10 +19,11 @@ spec:
         app: redis
         logs: plain
     spec:
+      terminationGracePeriodSeconds: 0
       containers:
         - name: master
           image: redis:5-alpine
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: 50m
