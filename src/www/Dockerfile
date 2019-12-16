@@ -18,7 +18,7 @@ RUN yarn build
 
 CMD ["node", "/app"]
 
-FROM nginx
+FROM nginx:alpine
 
 COPY --from=0 /app/build /app/
 

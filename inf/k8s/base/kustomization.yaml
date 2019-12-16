@@ -1,0 +1,8 @@
+---
+resources:
+  - api.yaml
+  - gameserver.yaml
+  - matchmaker.yaml
+  - redis.yaml
+  - worker.yaml
+  - www.yaml

@@ -11,6 +11,15 @@ build:
         - 'api/**/*.js'
         - 'lib/**/*.js'
         - 'backend/**/*.js'
+  - image: gcr.io/seandonmooy-1292/tacticsonline-gameserver
+    context: src
+    docker:
+      dockerfile: gameserver/Dockerfile
+    sync:
+        infer:
+        - 'gameserver/**/*.js'
+        - 'lib/**/*.js'
+        - 'backend/**/*.js'
   - image: gcr.io/seandonmooy-1292/tacticsonline-matchmaker
     context: src
     docker:
@@ -38,3 +47,6 @@ build:
         - 'www/**/*.js'
         - 'www/**/*.html'
         - 'lib/**/*.js'
+deploy:
+  kustomize:
+    path: "inf/k8s/overlays/dev"

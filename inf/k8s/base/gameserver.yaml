@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gameserver
+spec:
+  selector:
+    matchLabels:
+      app: gameserver
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "5000"
+        prometheus.io/scrape: "true"
+      labels:
+        app: gameserver
+        logs: json
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: ssl-volume
+          secret:
+            secretName: service-cert
+      terminationGracePeriodSeconds: 15
+      imagePullSecrets:
+        - name: registry-secret
+      containers:
+        - name: gameserver
+          image: gcr.io/seandonmooy-1292/tacticsonline-gameserver
+          imagePullPolicy: Always
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sleep", "15"]
+          ports:
+            - name: https-ports
+              containerPort: 4000
+            - name: metrics
+              containerPort: 5000
+          envFrom:
+            - secretRef:
+                name: common
+            - secretRef:
+                name: gameserver
+          env:
+            - name: GET_HOSTS_FROM
+              value: dns
+            - name: LOG_LEVEL
+              value: info
+            - name: LOGGING_LABEL
+              value: gameserver
+          volumeMounts:
+            - name: ssl-volume
+              mountPath: /app/inf/secrets
+          resources:
+            requests:
+              cpu: 50m
+              memory: 100Mi
+            limits:
+              cpu: "2"
+              memory: 1500Mi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: https-ports
+              scheme: HTTPS
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: https-ports
+              scheme: HTTPS
+            initialDelaySeconds: 10
+            periodSeconds: 10

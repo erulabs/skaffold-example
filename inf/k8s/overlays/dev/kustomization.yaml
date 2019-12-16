@@ -1,0 +1,24 @@
+---
+bases:
+  - ../../base
+secretGenerator:
+- name: service-cert
+  type: "kubernetes.io/tls"
+  files:
+    - tls.crt=secrets/selfsigned.crt.pem
+    - tls.key=secrets/selfsigned.key.pem
+- name: common
+  type: Opaque
+  env: secrets/common.env.plain
+- name: api
+  type: Opaque
+  env: secrets/api.env.plain
+- name: gameserver
+  type: Opaque
+  env: secrets/gameserver.env.plain
+- name: matchmaker
+  type: Opaque
+  env: secrets/matchmaker.env.plain
+- name: worker
+  type: Opaque
+  env: secrets/worker.env.plain
